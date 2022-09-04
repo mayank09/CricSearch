@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CricSearch</string>
+    <string name="no_result_found">Try with a different keyword. No matches found</string>
+</resources>
