@@ -40,11 +40,11 @@ fun Map<Restaurant, Menu?>?.filterData(query: String): MutableMap<Restaurant, Me
         //get all menu items in all categories for a restaurant
         val items = menu?.categories?.flatMap { category -> category.menuItems.map { it.name } }
 
-        //filter menu items for searched keyword
-        val filteredItem = items?.filter { it.contains(query, true) }
+        //find menu items for searched keyword
+        val filteredItem = items?.firstOrNull{ it.contains(query, true) }
 
         //if found a item match,
-        if (filteredItem?.isNotEmpty() == true) {
+        if (filteredItem != null) {
             //add matching restaurant to filtered Map with sorting order as item
             restaurant.sortingOrder = SortingOrder.ITEMS.ordinal
             menu.let {
@@ -69,17 +69,6 @@ fun Map<Restaurant, Menu?>?.filterData(query: String): MutableMap<Restaurant, Me
                 filteredMap[restaurant] = it
             }
         }
-
-/*         //if found a item match, or cuisine or name, add to search result
-         if (filteredItem?.isNotEmpty() == true ||
-             restaurant.cuisine_type.contains(query, true) ||
-             restaurant.name.contains(query, true)
-         ) {
-             menu?.let {
-                 //add matching restaurant to filtered Map
-                 filteredMap[restaurant] = it
-             }
-         }*/
     }
     return filteredMap
 }

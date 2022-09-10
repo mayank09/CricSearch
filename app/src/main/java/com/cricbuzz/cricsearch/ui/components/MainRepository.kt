@@ -25,6 +25,9 @@ class MainRepository @Inject constructor(
     fun getRestaurants(query: String?): Resource<Map<Restaurant, Menu?>> {
 
         return try {
+            //Initial state.....
+            Resource.Loading<Any>()
+
             //get list of restaurants
             val restaurants =
                 context.getResponseFromAsset<RestaurantResponse>(RESTAURANT_SOURCE).data?.restaurants
